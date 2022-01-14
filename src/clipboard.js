@@ -1,8 +1,8 @@
-import Emitter from 'tiny-emitter';
-import listen from 'good-listener';
-import ClipboardActionDefault from './actions/default';
-import ClipboardActionCut from './actions/cut';
-import ClipboardActionCopy from './actions/copy';
+import Emitter from "tiny-emitter";
+import listen from "good-listener";
+import ClipboardActionDefault from "./actions/default";
+import ClipboardActionCut from "./actions/cut";
+import ClipboardActionCopy from "./actions/copy";
 
 /**
  * Helper function to retrieve attribute value.
@@ -42,17 +42,17 @@ class Clipboard extends Emitter {
    */
   resolveOptions(options = {}) {
     this.action =
-      typeof options.action === 'function'
+      typeof options.action === "function"
         ? options.action
         : this.defaultAction;
     this.target =
-      typeof options.target === 'function'
+      typeof options.target === "function"
         ? options.target
         : this.defaultTarget;
     this.text =
-      typeof options.text === 'function' ? options.text : this.defaultText;
+      typeof options.text === "function" ? options.text : this.defaultText;
     this.container =
-      typeof options.container === 'object' ? options.container : document.body;
+      typeof options.container === "object" ? options.container : document.body;
   }
 
   /**
@@ -60,20 +60,21 @@ class Clipboard extends Emitter {
    * @param {String|HTMLElement|HTMLCollection|NodeList} trigger
    */
   listenClick(trigger) {
-    this.listener = listen(trigger, 'click', (e) => this.onClick(e));
-    this.keyListener = listen(trigger, 'keyup', (e) => this.onKeyUp(e));
+    this.listener = listen(trigger, "click", (e) => this.onClick(e));
+    this.keyListener = listen(trigger, "keyup", (e) => this.onKeyUp(e));
   }
 
   /**
-     * Checks for Spacebar/ ENTER keypress
-     * @param {Event} e
-     */
-   onKeyUp(e) {
-    if(e.key === "Enter" || e.key === "Spacebar" || e.key === " ") {
-        // forward event to onClick function
-        this.onClick(e);
+   * Checks for Spacebar/ ENTER keypress
+   * @param {Event} e
+   */
+  onKeyUp(e) {
+    if (e.key === "Enter" || e.key === "Spacebar" || e.key === " ") {
+      // forward event to onClick function
+      this.onClick(e);
+      e.preventDefault();
     }
-}
+  }
 
   /**
    * Defines a new `ClipboardAction` on each click event.
@@ -89,7 +90,7 @@ class Clipboard extends Emitter {
     });
 
     // Fires an event based on the copy operation result.
-    this.emit(selectedText ? 'success' : 'error', {
+    this.emit(selectedText ? "success" : "error", {
       action: this.action,
       text: selectedText,
       trigger,
@@ -108,7 +109,7 @@ class Clipboard extends Emitter {
    * @param {Element} trigger
    */
   defaultAction(trigger) {
-    return getAttributeValue('action', trigger);
+    return getAttributeValue("action", trigger);
   }
 
   /**
@@ -116,7 +117,7 @@ class Clipboard extends Emitter {
    * @param {Element} trigger
    */
   defaultTarget(trigger) {
-    const selector = getAttributeValue('target', trigger);
+    const selector = getAttributeValue("target", trigger);
 
     if (selector) {
       return document.querySelector(selector);
@@ -147,8 +148,8 @@ class Clipboard extends Emitter {
    * given.
    * @param {String} [action]
    */
-  static isSupported(action = ['copy', 'cut']) {
-    const actions = typeof action === 'string' ? [action] : action;
+  static isSupported(action = ["copy", "cut"]) {
+    const actions = typeof action === "string" ? [action] : action;
     let support = !!document.queryCommandSupported;
 
     actions.forEach((action) => {
@@ -163,7 +164,7 @@ class Clipboard extends Emitter {
    * @param {Element} trigger
    */
   defaultText(trigger) {
-    return getAttributeValue('text', trigger);
+    return getAttributeValue("text", trigger);
   }
 
   /**

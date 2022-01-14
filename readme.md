@@ -1,11 +1,5 @@
 # clipboard.js
-
-![Build Status](https://github.com/zenorocha/clipboard.js/workflows/build/badge.svg)
-![Killing Flash](https://img.shields.io/badge/killing-flash-brightgreen.svg?style=flat)
-
 > Modern copy to clipboard. No Flash. Just 3kb gzipped.
-
-<a href="https://clipboardjs.com/"><img width="728" src="https://cloud.githubusercontent.com/assets/398893/16165747/a0f6fc46-349a-11e6-8c9b-c5fd58d9099c.png" alt="Demo"></a>
 
 ## Why
 
@@ -13,25 +7,23 @@ Copying text to the clipboard shouldn't be hard. It shouldn't require dozens of 
 
 That's why clipboard.js exists.
 
-## Install
-
-You can get it on npm.
-
-```
-npm install clipboard --save
-```
-
-Or if you're not into package management, just [download a ZIP](https://github.com/zenorocha/clipboard.js/archive/master.zip) file.
+clipboard.js should also be accessible. That's why this fork exists.
 
 ## Setup
-
-First, include the script located on the `dist` folder or load it from [a third-party CDN provider](https://github.com/zenorocha/clipboard.js/wiki/CDN-Providers).
-
+### npm
+```
+npm i @philippdormann/clipboard.js
+```
+### dist file
 ```html
 <script src="dist/clipboard.min.js"></script>
 ```
+### cdn
+```html
+<script src="https://cdn.konfiapp.de/jsdelivr/npm/@philippdormann/clipboard@2/dist/clipboard.min.js"></script>
+```
 
-Now, you need to instantiate it by [passing a DOM selector](https://github.com/zenorocha/clipboard.js/blob/master/demo/constructor-selector.html#L18), [HTML element](https://github.com/zenorocha/clipboard.js/blob/master/demo/constructor-node.html#L16-L17), or [list of HTML elements](https://github.com/zenorocha/clipboard.js/blob/master/demo/constructor-nodelist.html#L18-L19).
+Now, you need to instantiate it by passing a DOM selector, HTML element or list of HTML elements.
 
 ```js
 new ClipboardJS('.btn');
@@ -55,7 +47,7 @@ The value you include on this attribute needs to match another's element selecto
 
 ```html
 <!-- Target -->
-<input id="foo" value="https://github.com/zenorocha/clipboard.js.git" />
+<input id="foo" value="bar" />
 
 <!-- Trigger -->
 <button class="btn" data-clipboard-target="#foo">
@@ -180,13 +172,3 @@ This library relies on both [Selection](https://developer.mozilla.org/en-US/docs
 The good news is that clipboard.js gracefully degrades if you need to support older browsers. All you have to do is show a tooltip saying `Copied!` when `success` event is called and `Press Ctrl+C to copy` when `error` event is called because the text is already selected.
 
 You can also check if clipboard.js is supported or not by running `ClipboardJS.isSupported()`, that way you can hide copy/cut buttons from the UI.
-
-## Bonus
-
-A browser extension that adds a "copy to clipboard" button to every code block on _GitHub, MDN, Gist, StackOverflow, StackExchange, npm, and even Medium._
-
-Install for [Chrome](https://chrome.google.com/webstore/detail/codecopy/fkbfebkcoelajmhanocgppanfoojcdmg) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/codecopy/).
-
-## License
-
-[MIT License](https://zenorocha.mit-license.org/) © Zeno Rocha

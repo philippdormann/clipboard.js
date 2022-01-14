@@ -1,9 +1,3 @@
-/*!
- * clipboard.js v2.0.8
- * https://clipboardjs.com/
- *
- * Licensed MIT © Zeno Rocha
- */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -723,10 +717,10 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
     key: "resolveOptions",
     value: function resolveOptions() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.action = typeof options.action === 'function' ? options.action : this.defaultAction;
-      this.target = typeof options.target === 'function' ? options.target : this.defaultTarget;
-      this.text = typeof options.text === 'function' ? options.text : this.defaultText;
-      this.container = clipboard_typeof(options.container) === 'object' ? options.container : document.body;
+      this.action = typeof options.action === "function" ? options.action : this.defaultAction;
+      this.target = typeof options.target === "function" ? options.target : this.defaultTarget;
+      this.text = typeof options.text === "function" ? options.text : this.defaultText;
+      this.container = clipboard_typeof(options.container) === "object" ? options.container : document.body;
     }
     /**
      * Adds a click event listener to the passed trigger.
@@ -738,17 +732,17 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
     value: function listenClick(trigger) {
       var _this2 = this;
 
-      this.listener = listen_default()(trigger, 'click', function (e) {
+      this.listener = listen_default()(trigger, "click", function (e) {
         return _this2.onClick(e);
       });
-      this.keyListener = listen_default()(trigger, 'keyup', function (e) {
+      this.keyListener = listen_default()(trigger, "keyup", function (e) {
         return _this2.onKeyUp(e);
       });
     }
     /**
-       * Checks for Spacebar/ ENTER keypress
-       * @param {Event} e
-       */
+     * Checks for Spacebar/ ENTER keypress
+     * @param {Event} e
+     */
 
   }, {
     key: "onKeyUp",
@@ -756,6 +750,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
       if (e.key === "Enter" || e.key === "Spacebar" || e.key === " ") {
         // forward event to onClick function
         this.onClick(e);
+        e.preventDefault();
       }
     }
     /**
@@ -774,7 +769,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
         text: this.text(trigger)
       }); // Fires an event based on the copy operation result.
 
-      this.emit(selectedText ? 'success' : 'error', {
+      this.emit(selectedText ? "success" : "error", {
         action: this.action,
         text: selectedText,
         trigger: trigger,
@@ -796,7 +791,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "defaultAction",
     value: function defaultAction(trigger) {
-      return getAttributeValue('action', trigger);
+      return getAttributeValue("action", trigger);
     }
     /**
      * Default `target` lookup function.
@@ -806,7 +801,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "defaultTarget",
     value: function defaultTarget(trigger) {
-      var selector = getAttributeValue('target', trigger);
+      var selector = getAttributeValue("target", trigger);
 
       if (selector) {
         return document.querySelector(selector);
@@ -827,7 +822,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * @param {Element} trigger
      */
     function defaultText(trigger) {
-      return getAttributeValue('text', trigger);
+      return getAttributeValue("text", trigger);
     }
     /**
      * Destroy lifecycle.
@@ -867,8 +862,8 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "isSupported",
     value: function isSupported() {
-      var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['copy', 'cut'];
-      var actions = typeof action === 'string' ? [action] : action;
+      var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ["copy", "cut"];
+      var actions = typeof action === "string" ? [action] : action;
       var support = !!document.queryCommandSupported;
       actions.forEach(function (action) {
         support = support && !!document.queryCommandSupported(action);

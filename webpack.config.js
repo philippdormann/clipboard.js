@@ -1,14 +1,7 @@
-const pkg = require('./package.json');
 const path = require('path');
-const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production' || false;
-
-const banner = `clipboard.js v${pkg.version}
-https://clipboardjs.com/
-
-Licensed MIT © Zeno Rocha`;
 
 module.exports = {
   entry: './src/clipboard.js',
@@ -41,6 +34,5 @@ module.exports = {
         },
       }),
     ],
-  },
-  plugins: [new webpack.BannerPlugin({ banner })],
+  }
 };
