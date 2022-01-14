@@ -20,7 +20,7 @@ npm i @philippdormann/clipboard.js
 ```
 ### cdn
 ```html
-<script src="https://cdn.konfiapp.de/jsdelivr/npm/@philippdormann/clipboard@2/dist/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@philippdormann/clipboard@2.0.10/dist/clipboard.min.js"></script>
 ```
 
 Now, you need to instantiate it by passing a DOM selector, HTML element or list of HTML elements.
