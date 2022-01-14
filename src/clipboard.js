@@ -61,7 +61,19 @@ class Clipboard extends Emitter {
    */
   listenClick(trigger) {
     this.listener = listen(trigger, 'click', (e) => this.onClick(e));
+    this.keyListener = listen(trigger, 'keyup', (e) => this.onKeyUp(e));
   }
+
+  /**
+     * Checks for Spacebar/ ENTER keypress
+     * @param {Event} e
+     */
+   onKeyUp(e) {
+    if(e.key === "Enter" || e.key === "Spacebar" || e.key === " ") {
+        // forward event to onClick function
+        this.onClick(e);
+    }
+}
 
   /**
    * Defines a new `ClipboardAction` on each click event.
@@ -159,6 +171,7 @@ class Clipboard extends Emitter {
    */
   destroy() {
     this.listener.destroy();
+    this.keyListener.destroy();
   }
 }
 

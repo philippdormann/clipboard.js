@@ -73,6 +73,13 @@ describe('Clipboard', () => {
     });
   });
 
+  describe('#listenKeyUp', () => {
+    it('should add a keyup event listener to the passed selector', () => {
+        let clipboard = new Clipboard('.btn');
+        assert.isObject(clipboard.keyListener);
+    });
+  });
+
   describe('#onClick', () => {
     it('should init when called', (done) => {
       let clipboard = new Clipboard('.btn');
